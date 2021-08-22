@@ -1,0 +1,11 @@
+language: objective-c
+
+osx_image: xcode12.5
+env:
+  matrix:
+    - TEST_SDK=iphonesimulator14.5 OS=14.5 NAME='iPhone 12 Pro Max'
+    - TEST_SDK=iphonesimulator12.4 OS=12.4 NAME='iPhone Xs Max'
+
+script:
+  - set -o pipefail && xcodebuild test -enableCodeCoverage YES -project RadleyLib-Demo.xcodeproj -scheme RadleyLib-Demo -sdk $TEST_SDK -destination "platform=iOS Simulator,OS=$OS,name=$NAME" ONLY_ACTIVE_ARCH=YES
+
